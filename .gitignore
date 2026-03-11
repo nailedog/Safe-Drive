@@ -5,3 +5,9 @@ build/
 __pycache__/
 *.pyc
 .DS_Store
+
+# Промежуточные файлы квантизации (генерируются скриптами)
+quantize_fl/*.json
+quantize_fl/face_landmark_f32.tflite
+quantize_fl/face_landmark_int8.tflite
+quantize_fl/savedmodel/
