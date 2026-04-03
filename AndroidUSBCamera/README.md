@@ -289,45 +289,6 @@ dependencies {
 }
 ```
 
-
-
-[@ 中文文档](https://juejin.cn/post/7115229806844706847/)
-
-
-
-Demo
--------
-
-![](https://www.pgyer.com/app/qrcode/fVo5)
-
-&emsp;[AUSBC.apk](https://github.com/jiangdongguo/AndroidUSBCamera/blob/master/app/release/app-release.apk)
-
-
-Version
--------
-
-[Update details](https://github.com/jiangdongguo/AndroidUSBCamera/blob/master/VERSION.md)
-
-Q & A
--------
-
-[FAQ](https://github.com/jiangdongguo/AndroidUSBCamera/blob/master/FAQ.md)
-
-
-Homepage & Help
--------
-
-[1. JUEJIN](https://juejin.cn/user/1311062343296222)
-
-[2. CSDN（Update stopped）](https://blog.csdn.net/andrexpert)
-
-
-
-&emsp;If you have any question or fun ideas, please issues to me.  
-&emsp;Of course, you can also send me a **微信**   "`laojiang299`"   or a **EMAIL**  "`765067602@qq.com`".   
-
-&emsp;So, do not forget to send logs from location **Android/data/com.jiangdg.ausbc/files** and collect logcat information by executing command `adb shell logcat -v threadtime > usbcamera.log`
-
 License
 -------
 
