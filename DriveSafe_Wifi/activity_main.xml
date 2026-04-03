@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:stream="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    android:padding="8dp">
+
+<com.github.niqdev.mjpeg.MjpegSurfaceView
+android:id="@+id/mjpegView"
+android:layout_width="match_parent"
+android:layout_height="0dp"
+android:layout_weight="1"
+stream:type="stream_default"/>
+
+<TextView
+android:id="@+id/fpsText"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:text="FPS: N/A"
+android:textColor="@android:color/white"
+    android:textSize="16sp"
+    android:paddingTop="4dp"
+    android:paddingBottom="4dp"/>
+
+<TextView
+android:id="@+id/eyeStatusText"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:text="Eyes not detected"
+android:textColor="@android:color/white"
+    android:textSize="16sp"
+    android:paddingBottom="8dp"/>
+
+    <!-- 4. Connect button at the very bottom -->
+<Button
+android:id="@+id/connectButton"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:text="Connect" />
+
+    </LinearLayout>

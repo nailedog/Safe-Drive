@@ -1,0 +1,96 @@
+/**************************************************************************
+ *  esp32cam_webserver_with_blink.ino
+ *  Works with Arduino-ESP32 core 3.x (tested 3.2.0) and AI-Thinker ESP32-CAM
+ *  Streams MJPEG on :81/stream  +  /led control with 10 Hz blink
+ **************************************************************************/
+
+#include "esp_camera.h"
+#include <WiFi.h>
+#include "esp_http_server.h"
+#include "esp32-hal-timer.h"
+
+const char* ssid     = "ESP32-CAM-AP";
+const char* password = "fiwi@768FU$#Nooo";
+
+#define CAMERA_MODEL_AI_THINKER    
+#include "camera_pins.h"
+
+#define BLINK_LED_PIN   4                 
+volatile bool blinkEnabled = false;      
+hw_timer_t* blinkTimer     = nullptr;    
+
+static esp_err_t led_handler(httpd_req_t*);
+void startCameraServer();              
+void IRAM_ATTR onBlink();              
+
+void setup() {
+  Serial.begin(115200);
+  pinMode(BLINK_LED_PIN, OUTPUT);
+  digitalWrite(BLINK_LED_PIN, LOW);
+
+  camera_config_t cfg;
+  cfg.ledc_channel = LEDC_CHANNEL_0; cfg.ledc_timer = LEDC_TIMER_0;
+  cfg.pin_d0 = Y2_GPIO_NUM; cfg.pin_d1 = Y3_GPIO_NUM; cfg.pin_d2 = Y4_GPIO_NUM;
+  cfg.pin_d3 = Y5_GPIO_NUM; cfg.pin_d4 = Y6_GPIO_NUM; cfg.pin_d5 = Y7_GPIO_NUM;
+  cfg.pin_d6 = Y8_GPIO_NUM; cfg.pin_d7 = Y9_GPIO_NUM;
+  cfg.pin_xclk = XCLK_GPIO_NUM; cfg.pin_pclk = PCLK_GPIO_NUM;
+  cfg.pin_vsync = VSYNC_GPIO_NUM; cfg.pin_href = HREF_GPIO_NUM;
+  cfg.pin_sccb_sda = SIOD_GPIO_NUM; cfg.pin_sccb_scl = SIOC_GPIO_NUM;
+  cfg.pin_pwdn = PWDN_GPIO_NUM; cfg.pin_reset = RESET_GPIO_NUM;
+  cfg.xclk_freq_hz = 20'000'000;
+  cfg.pixel_format = PIXFORMAT_JPEG;
+  cfg.frame_size   = FRAMESIZE_QVGA;
+  cfg.jpeg_quality = 10;
+  cfg.fb_count     = 2;
+  cfg.fb_location  = CAMERA_FB_IN_PSRAM;
+  cfg.grab_mode    = CAMERA_GRAB_LATEST;
+
+  if (esp_camera_init(&cfg) != ESP_OK) {
+    Serial.println("Camera init failed");
+    while (true) {}
+  }
+
+  blinkTimer = timerBegin(1'000'000);        
+  timerAttachInterrupt(blinkTimer, &onBlink);
+  timerAlarm(blinkTimer, 50'000, true, 0);
+  
+  WiFi.softAP(ssid, password, 1, true, 1); // ssid, password, channel, hidden-ssid, max_connection
+
+  IPAddress ip = WiFi.softAPIP();
+  Serial.printf("AP Mode → SSID:%s  IP:%s\n", ssid, ip.toString().c_str());  // AP IP 192.168.4.1
+
+  startCameraServer();
+  extern httpd_handle_t camera_httpd;
+  httpd_uri_t led_uri = {
+    .uri      = "/led",
+    .method   = HTTP_GET,
+    .handler  = led_handler,
+    .user_ctx = nullptr
+  };
+  httpd_register_uri_handler(camera_httpd, &led_uri);
+
+  Serial.println("Ready: /stream and /led?state=blink|off");
+}
+
+void loop() {
+  delay(10000);
+}
+
+void IRAM_ATTR onBlink() {
+  if (blinkEnabled) {
+    digitalWrite(BLINK_LED_PIN, !digitalRead(BLINK_LED_PIN));
+  } else {
+    digitalWrite(BLINK_LED_PIN, LOW);
+  }
+}
+
+static esp_err_t led_handler(httpd_req_t* req) {
+  char query[16];
+  httpd_req_get_url_query_str(req, query, sizeof(query));
+  if      (strstr(query, "blink")) blinkEnabled = true;
+  else if (strstr(query, "off"))   { blinkEnabled = false; digitalWrite(BLINK_LED_PIN, LOW); }
+
+  httpd_resp_set_type(req, "text/plain");
+  httpd_resp_sendstr(req, blinkEnabled ? "blinking" : "off");
+  return ESP_OK;
+}
