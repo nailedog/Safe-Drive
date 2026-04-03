@@ -1,0 +1,429 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8F9FA"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="32dp">
+
+        <!-- Eye Status with Icon -->
+        <LinearLayout
+            android:id="@+id/eyeStatusLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/eye_status_background"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="8dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_eye"
+                android:layout_marginEnd="8dp"
+                app:tint="#666666" />
+
+            <TextView
+                android:id="@+id/eyeStatusTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/eye_open_99"
+                android:textSize="16sp"
+                android:textColor="#333333"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <!-- Circular Camera Container -->
+        <FrameLayout
+            android:id="@+id/circularCameraFrame"
+            android:layout_width="240dp"
+            android:layout_height="240dp"
+            android:layout_marginTop="24dp"
+            app:layout_constraintTop_toBottomOf="@+id/eyeStatusLayout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <!-- Camera View Container -->
+            <FrameLayout
+                android:id="@+id/cameraViewContainer"
+                android:layout_width="230dp"
+                android:layout_height="230dp"
+                android:layout_gravity="center"
+                android:background="@drawable/circular_camera_background"
+                android:clipToOutline="true" />
+
+            <!-- Circular Border Overlay -->
+            <ImageView
+                android:layout_width="240dp"
+                android:layout_height="240dp"
+                android:layout_gravity="center"
+                android:src="@drawable/circular_border" />
+
+        </FrameLayout>
+
+        <!-- Start Journey Button -->
+        <Button
+            android:id="@+id/journeyButton"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginHorizontal="52dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/start_my_journey"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:background="@drawable/green_button_background"
+            android:elevation="4dp"
+            app:layout_constraintTop_toBottomOf="@+id/circularCameraFrame"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:backgroundTint="@null"
+            />
+
+        <!-- Sound Selection Card -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/soundCard"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="24dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            app:cardBackgroundColor="#EBEBEB"
+            app:layout_constraintTop_toBottomOf="@+id/journeyButton"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <!-- Sound Header -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="16dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/choose_sound"
+                        android:textSize="16sp"
+                        android:textStyle="normal"
+                        android:textColor="#333333" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tap_to_play"
+                        android:textSize="12sp"
+                        android:textColor="#999999" />
+
+                </LinearLayout>
+
+                <!-- Sound Buttons Grid -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <FrameLayout
+                        android:layout_width="0dp"
+                        android:layout_height="56dp"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="0dp"
+                        >
+
+                        <ImageButton
+                            android:id="@+id/soundButton1"
+                            android:layout_width="56dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:background="@drawable/sound_button_background"
+                            android:src="@drawable/ic_sound_1"
+                            android:contentDescription="Sound 1" />
+
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:layout_width="0dp"
+                        android:layout_height="56dp"
+                        android:layout_weight="1"
+                        android:layout_marginHorizontal="0dp">
+
+                        <ImageButton
+                            android:id="@+id/soundButton2"
+                            android:layout_width="56dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:background="@drawable/sound_button_selected_background"
+                            android:src="@drawable/ic_sound_2"
+                            android:contentDescription="Sound 2" />
+
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:layout_width="0dp"
+                        android:layout_height="56dp"
+                        android:layout_weight="1"
+                        android:layout_marginHorizontal="0dp">
+
+                        <ImageButton
+                            android:id="@+id/soundButton3"
+                            android:layout_width="56dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:background="@drawable/sound_button_background"
+                            android:src="@drawable/ic_sound_3"
+                            android:contentDescription="Sound 3" />
+
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:layout_width="0dp"
+                        android:layout_height="56dp"
+                        android:layout_weight="1"
+                        android:layout_marginStart="0dp">
+
+                        <ImageButton
+                            android:id="@+id/soundButton4"
+                            android:layout_width="56dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:background="@drawable/sound_button_background"
+                            android:src="@drawable/ic_sound_4"
+                            android:contentDescription="Sound 4" />
+
+                    </FrameLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- Flashlight Control Card -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/flashlightCard"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="16dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            app:cardBackgroundColor="#EBEBEB"
+            app:layout_constraintTop_toBottomOf="@+id/soundCard"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="20dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/use_flashlight"
+                    android:textSize="16sp"
+                    android:textStyle="normal"
+                    android:textColor="#333333" />
+
+                <Switch
+                    android:id="@+id/flashlightSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:checked="true"
+                    android:track="@drawable/flashlight_switch_track"
+                    android:thumb="@drawable/flashlight_switch_thumb"
+                    android:switchMinWidth="60dp"
+                    android:thumbTextPadding="0dp"
+                    tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- Sleep Timeout Card -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/sleepTimeoutCard"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="16dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            app:cardBackgroundColor="#EBEBEB"
+            app:layout_constraintTop_toBottomOf="@+id/flashlightCard"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="20dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sleep_timeout"
+                    android:textSize="16sp"
+                    android:textStyle="normal"
+                    android:textColor="#333333" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/decreaseTimeoutBtn"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:textSize="20sp"
+                    android:textColor="#666666"
+                    android:background="@drawable/ic_sign_minus"
+                    app:backgroundTint="@null"
+                    android:layout_marginEnd="16dp" />
+
+                <TextView
+                    android:id="@+id/timeoutValueTv"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:text="0.5s"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="#333333"
+                    android:gravity="center" />
+
+                <Button
+                    android:id="@+id/increaseTimeoutBtn"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:textSize="20sp"
+                    android:textColor="#666666"
+                    android:background="@drawable/ic_sign_plus"
+                    app:backgroundTint="@null"
+                    android:layout_marginStart="16dp" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- Eye Threshold Section -->
+        <LinearLayout
+            android:id="@+id/thresholdSection"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="32dp"
+            app:layout_constraintTop_toBottomOf="@+id/sleepTimeoutCard"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <!-- Threshold Controls -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="16dp">
+
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/ic_eye_closed"
+                    android:background="@drawable/eye_threshold_icon_background"
+                    android:padding="6dp"
+                    android:layout_marginEnd="16dp"
+                    app:tint="@android:color/white" />
+
+                <SeekBar
+                    android:id="@+id/sensitivitySeekBar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:max="40"
+                    android:progress="20"
+                    android:progressTint="#27AE60"
+                    android:thumbTint="#27AE60"
+                    android:progressBackgroundTint="#27AE60" />
+
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/ic_eye_open"
+                    android:background="@drawable/eye_threshold_icon_background_outline"
+                    android:padding="6dp"
+                    android:layout_marginStart="16dp"
+                    app:tint="#27AE60" />
+
+            </LinearLayout>
+
+            <!-- Percentage Labels -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginHorizontal="48dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="20%"
+                    android:textSize="12sp"
+                    android:textColor="#999999"
+                    android:gravity="start" />
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="40%"
+                    android:textSize="12sp"
+                    android:textColor="#999999"
+                    android:gravity="center" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="60%"
+                    android:textSize="12sp"
+                    android:textColor="#999999"
+                    android:gravity="end" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

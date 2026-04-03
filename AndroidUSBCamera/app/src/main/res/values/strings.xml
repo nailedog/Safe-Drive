@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name" translatable="false">DriveSafe</string>
+    <string name="permission_tip" translatable="false">You have already denied permission access. Go to the Settings page to turn on permissions</string>
+    <string name="dialog_contact_title" translatable="false">Contact me:</string>
+    <string name="dialog_contact_message" translatable="false">bekhzod2204@gmail.com\n\n❤ version: %s</string>
+    <string name="frame_rate" translatable="false">frame rate: %d fps</string>
+    <string name="use_flashlight">Use flashlight</string>
+    <string name="tap_to_play">Tap to play</string>
+    <string name="choose_sound">Choose sound</string>
+    <string name="start_my_journey">Start my journey</string>
+    <string name="eye_open_99">Eyes open: 99%</string>
+    <string name="sleep_timeout">Sleep timeout</string>
+
+</resources>
