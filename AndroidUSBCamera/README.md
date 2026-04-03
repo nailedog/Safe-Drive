@@ -328,15 +328,6 @@ Homepage & Help
 
 &emsp;So, do not forget to send logs from location **Android/data/com.jiangdg.ausbc/files** and collect logcat information by executing command `adb shell logcat -v threadtime > usbcamera.log`
 
-
-
-Thanks
--------
-
- [saki4510t/UVCCamera](https://github.com/saki4510t/UVCCamera)
-
-
-
 License
 -------
 
